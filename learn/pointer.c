@@ -1,0 +1,13 @@
+/* pointer.c
+ *
+ * gobjdump -z -M intel -S -D pointer
+ */
+#include <stdint.h>
+
+int8_t i = 0;
+int8_t *p1 = (int8_t *) 0x1234;
+int8_t *p2 = &i;
+
+int main(int argc, char *argv[]) {
+    return 0;
+}
