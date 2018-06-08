@@ -1,12 +1,11 @@
 A toy OS for x86. Follow [some][1] [tutorials][2] in the net.
 
-`objdump`, `hexdump`, `readelf` for Mac OS
+- For learning:
 
 ```
-brew install binutils
+cd learn
+vagrant up
 ```
-
-Now we have `gobjdump`, `ghexdump`, `greadelf` with the same functionality.
 
 
 [1]: https://github.com/tuhdo/os01
