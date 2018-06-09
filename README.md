@@ -10,7 +10,7 @@ make
 Back in your host:
 
 ```
-qemu-system-x86_64 -drive format=raw,file=os-image.bin,if=floppy
+make run
 ```
 
 
