@@ -17,19 +17,21 @@ os-image.bin: boot/bootsect.bin kernel.bin
 # '--oformat binary' deletes all symbols as a collateral, so we don't need
 # to 'strip' them manually on this case
 kernel.bin: boot/kernel_entry.o ${OBJ}
-	${LD} -o $@ -Ttext 0x2000 --entry main $^ --oformat binary
+	${LD} -o $@ -Ttext 0x1000 --entry main $^ --oformat binary
 
 # Used for debugging purposes
 kernel.elf: boot/kernel_entry.o ${OBJ}
-	${LD} -o $@ -Ttext 0x2000 $^
+	${LD} -o $@ -Ttext 0x1000 --entry main $^
 
 run: os-image.bin
-	qemu-system-i686 -fda os-image.bin
+	qemu-system-i386 -drive format=raw,file=os-image.bin,if=floppy
 
 # Open the connection to qemu and load our kernel-object file with symbols
-debug: os-image.bin kernel.elf
-	qemu-system-i686 -s -fda os-image.bin &
-	${GDB} -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
+debug: os-image.bin
+	qemu-system-i386 -drive format=raw,file=os-image.bin,if=floppy -gdb tcp::26000 -S
+
+gdb:
+	${GDB} -ex "set architecture i8086" -ex "target remote localhost:26000" -ex "symbol-file kernel.elf"
 
 # Generic rules for wildcards
 # To make an object, always compile from its .c

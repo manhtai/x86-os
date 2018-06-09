@@ -6,7 +6,7 @@ apt-get install -y nasm gdb gcc build-essential bison flex libgmp3-dev libmpc-de
 
 # prepare
 export PREFIX="$HOME/opt/cross"
-export TARGET=i386-elf
+export TARGET=i686-elf
 export PATH="$PREFIX/bin:$PATH"
 
 export BINUTILS="binutils-2.30"
